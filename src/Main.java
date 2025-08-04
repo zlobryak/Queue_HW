@@ -1,20 +1,17 @@
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         //Создадим изначальный список, как нас просят в задаче
         List<String> firstClients = List.of("Anya", "Sveta", "Olya", "Alexandra", "Ruslana", "Olesya", "Vika");
 
-        Queue<String> queue = new PriorityQueue<>();
+        Queue<String> queue = new LinkedList<>();
         queue.addAll(firstClients); //Заполним очередь из списка
         int counter = 0;
         while (!queue.isEmpty()) {
             counter++;
             String person = queue.poll();
-            System.out.printf("%d. Принята %s. ", counter, person);
+            System.out.printf("%d. %s сделал новый маникюр. ", counter, person);
             try {
                 Thread.sleep(600); // Задержка 1000 миллисекунд = 1 секунда
             } catch (InterruptedException e) {
@@ -24,7 +21,7 @@ public class Main {
             }
             if (Math.random() < 0.5) { // проверка условия, которое срабатывает с 50% вероятностью
                 System.out.println("Друг записался");
-                queue.add("Friend of." + person);
+                queue.offer("Friend of." + person);
             } else {
                 System.out.println("Друг не записался");
             }
@@ -54,7 +51,7 @@ public class Main {
 // Например, если порекомендовала Sveta, то друга будут звать a friend of Sveta.
 // Если и её друг порекомендует, то такого друга будут звать a friend of a friend of Sveta.
 // Новый записывающийся всегда встаёт в конец очереди.
-//Напишите программу, которая будет разбирать очередь из клиентов,
+// Напишите программу, которая будет разбирать очередь из клиентов,
 // с вероятностью 50% добавляя нового клиента после обработки текущего клиента.
 //В качестве обработки клиента достаточно выводить на экран фразу виду:
 // <имя> сделал новый маникюр. Например, Alexandra сделала новый маникюр.
